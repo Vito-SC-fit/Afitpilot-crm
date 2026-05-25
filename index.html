@@ -21,6 +21,9 @@
     --success-bg: #eaf3de;
     --success-text: #3b6d11;
     --success-border: rgba(59,109,17,0.3);
+    --error-bg: #fcebeb;
+    --error-text: #a32d2d;
+    --error-border: rgba(163,45,45,0.3);
     --radius: 8px;
     --radius-lg: 12px;
   }
@@ -39,6 +42,9 @@
       --success-bg: #173404;
       --success-text: #c0dd97;
       --success-border: rgba(192,221,151,0.3);
+      --error-bg: #501313;
+      --error-text: #f09595;
+      --error-border: rgba(240,149,149,0.3);
     }
   }
 
@@ -52,10 +58,6 @@
 
   .container { max-width: 640px; margin: 0 auto; }
 
-  header { margin-bottom: 2rem; }
-  header h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
-  header p { font-size: 14px; color: var(--text-secondary); }
-
   .logo {
     display: flex; align-items: center; gap: 8px;
     margin-bottom: 1.5rem;
@@ -66,6 +68,10 @@
   }
   .logo-dot span { color: var(--accent-text); font-size: 13px; font-weight: 700; }
   .logo-name { font-size: 15px; font-weight: 600; }
+
+  header { margin-bottom: 2rem; }
+  header h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  header p { font-size: 14px; color: var(--text-secondary); }
 
   .card {
     background: var(--surface);
@@ -102,7 +108,6 @@
     box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
   }
   textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
-  select { cursor: pointer; }
 
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
@@ -116,7 +121,6 @@
   }
   .ig-preview.show { display: flex; }
   .ig-preview a { color: #E1306C; text-decoration: none; font-weight: 500; }
-  .ig-preview a:hover { text-decoration: underline; }
 
   .btn-primary {
     width: 100%; padding: 11px;
@@ -129,76 +133,29 @@
     margin-top: 4px;
   }
   .btn-primary:hover { opacity: 0.82; }
-  .btn-primary:active { transform: scale(0.99); }
-
-  .btn-secondary {
-    width: 100%; padding: 10px;
-    background: transparent; color: var(--text);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 14px; font-weight: 500;
-    cursor: pointer; font-family: inherit;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    transition: background 0.15s;
-    margin-top: 8px;
-  }
-  .btn-secondary:hover { background: var(--bg); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
   .toast {
     display: none; padding: 11px 14px;
-    background: var(--success-bg); color: var(--success-text);
-    border: 0.5px solid var(--success-border);
     border-radius: var(--radius); font-size: 13px;
     align-items: center; gap: 8px;
     margin-bottom: 1.25rem;
   }
+  .toast.success { background: var(--success-bg); color: var(--success-text); border: 0.5px solid var(--success-border); }
+  .toast.error { background: var(--error-bg); color: var(--error-text); border: 0.5px solid var(--error-border); }
   .toast.show { display: flex; }
 
-  .table-header {
-    display: flex; align-items: center;
-    justify-content: space-between; margin-bottom: 10px;
+  .sheet-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; padding: 6px 0;
   }
-  .table-count { font-size: 13px; color: var(--text-secondary); }
-
-  .table-wrap { overflow-x: auto; border-radius: var(--radius); }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th {
-    text-align: left; padding: 9px 10px;
-    background: var(--bg); color: var(--text-secondary);
-    font-weight: 500; font-size: 12px;
-    border-bottom: 0.5px solid var(--border);
-    white-space: nowrap;
-  }
-  td {
-    padding: 9px 10px;
-    border-bottom: 0.5px solid var(--border);
-    color: var(--text); vertical-align: top;
-  }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--bg); }
-
-  .badge {
-    display: inline-block; font-size: 11px; font-weight: 500;
-    padding: 2px 8px; border-radius: 20px;
-    border: 0.5px solid var(--border);
-    color: var(--text-secondary);
-  }
-  .badge.yes { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
-  .badge.maybe { background: #faeeda; color: #854f0b; border-color: rgba(133,79,11,0.3); }
-  .badge.no { background: #fcebeb; color: #a32d2d; border-color: rgba(163,45,45,0.3); }
-
-  .empty {
-    text-align: center; padding: 2.5rem;
-    color: var(--text-muted); font-size: 13px;
-  }
-  .empty i { font-size: 28px; display: block; margin-bottom: 8px; opacity: 0.4; }
-
-  .handle-link { color: #E1306C; text-decoration: none; font-weight: 500; }
-  .handle-link:hover { text-decoration: underline; }
-
-  .niche-cell { max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sheet-link:hover { color: var(--text); }
 
   footer { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 2rem; }
+
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -211,12 +168,10 @@
 
   <header>
     <h1>Add a coach</h1>
-    <p>Paste an Instagram URL and fill in the details — it saves locally and you can export as CSV.</p>
+    <p>Fill in the profile details — it goes straight into the Outreach Log.</p>
   </header>
 
-  <div id="toast" class="toast">
-    <i class="ti ti-circle-check"></i> Coach added successfully!
-  </div>
+  <div id="toast" class="toast"></div>
 
   <div class="card">
     <div class="card-title">Profile info</div>
@@ -290,61 +245,29 @@
       <textarea id="notes" placeholder="Anything to flag — influencer profile, not ideal ICP, etc."></textarea>
     </div>
 
-    <button class="btn-primary" onclick="addCoach()">
-      <i class="ti ti-plus"></i> Add to CRM
+    <button class="btn-primary" id="submit-btn" onclick="addCoach()">
+      <i class="ti ti-table-import"></i> Add to Outreach Log
     </button>
+
+    <div style="margin-top:12px">
+      <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1Ra42Zbj7fKQeKFJZwPKDa46Z4ze_zRfsUPRUzHEBSjA/edit#gid=558936933" target="_blank" rel="noopener">
+        <i class="ti ti-external-link"></i> Open Outreach Log
+      </a>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="table-header">
-      <span class="table-count" id="count">0 coaches this session</span>
-      <button class="btn-secondary" style="width:auto;padding:6px 14px;font-size:13px;margin-top:0" onclick="exportCSV()">
-        <i class="ti ti-download"></i> Export CSV
-      </button>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Handle</th>
-            <th>Name</th>
-            <th>Followers</th>
-            <th>Language</th>
-            <th>ICP</th>
-            <th>Niche</th>
-          </tr>
-        </thead>
-        <tbody id="crm-body">
-          <tr>
-            <td colspan="6" class="empty">
-              <i class="ti ti-users"></i>
-              No coaches added yet
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <button class="btn-secondary" onclick="clearAll()" id="clear-btn" style="display:none;margin-top:8px;color:#a32d2d;border-color:rgba(163,45,45,0.3)">
-      <i class="ti ti-trash"></i> Clear session
-    </button>
-  </div>
-
-  <footer>Afitpilot CRM · Data saved locally in your browser</footer>
+  <footer>Afitpilot CRM · Submissions go directly to the Outreach Log</footer>
 </div>
 
 <script>
-let coaches = JSON.parse(localStorage.getItem('afitpilot_coaches') || '[]');
-renderTable();
+const SCRIPT_URL = "https://script.google.com/a/macros/afitpilot.com/s/AKfycbyAT7ZPtG0VxlRu9y8VmZ_aXxcDIvnTd4skoXAcscTi_OnYk4uAjzLDo-cW6e0Xn2uv/exec";
 
 function parseHandle(url) {
   const match = url.match(/instagram\.com\/([^/?#\s]+)/);
   const preview = document.getElementById('handle-preview');
   const link = document.getElementById('handle-link');
   if (match && match[1] && !['p','reel','stories','explore'].includes(match[1])) {
-    const handle = '@' + match[1];
-    link.textContent = handle;
+    link.textContent = '@' + match[1];
     link.href = 'https://www.instagram.com/' + match[1] + '/';
     preview.classList.add('show');
   } else {
@@ -357,9 +280,13 @@ function getHandle(url) {
   return match ? '@' + match[1] : url;
 }
 
-function addCoach() {
+async function addCoach() {
   const url = document.getElementById('url').value.trim();
   if (!url) { document.getElementById('url').focus(); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Sending...';
 
   const coach = {
     handle: getHandle(url),
@@ -372,16 +299,24 @@ function addCoach() {
     niche: document.getElementById('niche').value.trim() || '—',
     hook: document.getElementById('hook').value.trim() || '',
     notes: document.getElementById('notes').value.trim() || '',
-    date: new Date().toLocaleDateString('en-GB'),
-    reply: '', replyType: '', callBooked: '', callDone: '', followUp: ''
+    date: new Date().toLocaleDateString('en-GB')
   };
 
-  coaches.push(coach);
-  localStorage.setItem('afitpilot_coaches', JSON.stringify(coaches));
-  clearForm();
-  renderTable();
-  showToast();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(coach)
+    });
+    clearForm();
+    showToast('success', 'Coach added to the Outreach Log!');
+  } catch (err) {
+    showToast('error', 'Something went wrong — check your connection and try again.');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="ti ti-table-import"></i> Add to Outreach Log';
 }
 
 function clearForm() {
@@ -391,55 +326,11 @@ function clearForm() {
   document.getElementById('handle-preview').classList.remove('show');
 }
 
-function renderTable() {
-  const tbody = document.getElementById('crm-body');
-  const count = document.getElementById('count');
-  const clearBtn = document.getElementById('clear-btn');
-  count.textContent = coaches.length + ' coach' + (coaches.length !== 1 ? 'es' : '') + ' this session';
-  clearBtn.style.display = coaches.length > 0 ? 'flex' : 'none';
-
-  if (coaches.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty"><i class="ti ti-users"></i>No coaches added yet</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = coaches.map((c, i) => `
-    <tr>
-      <td><a class="handle-link" href="${c.url}" target="_blank" rel="noopener">${c.handle}</a></td>
-      <td>${c.name}</td>
-      <td>${c.followers}</td>
-      <td>${c.language}</td>
-      <td><span class="badge ${c.icp.toLowerCase()}">${c.icp}</span></td>
-      <td class="niche-cell" title="${c.niche}">${c.niche}</td>
-    </tr>`).join('');
-}
-
-function showToast() {
+function showToast(type, msg) {
   const t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-function clearAll() {
-  if (!confirm('Clear all coaches from this session?')) return;
-  coaches = [];
-  localStorage.removeItem('afitpilot_coaches');
-  renderTable();
-}
-
-function exportCSV() {
-  if (coaches.length === 0) return;
-  const headers = ['IG Handle','Name','Followers','Type/Role','Language','ICP Fit','Niche/Angle','DM Hook Used','Notes','Date Sent','Reply (Y/N)','Reply Type','Call Booked','Call Done','Follow-up Date'];
-  const rows = coaches.map(c =>
-    [c.handle, c.name, c.followers, c.type, c.language, c.icp, c.niche, c.hook, c.notes, c.date, c.reply, c.replyType, c.callBooked, c.callDone, c.followUp]
-    .map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')
-  );
-  const csv = '\uFEFF' + [headers.join(','), ...rows].join('\r\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'afitpilot_coaches_' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
+  t.className = 'toast ' + type + ' show';
+  t.innerHTML = '<i class="ti ti-' + (type === 'success' ? 'circle-check' : 'alert-circle') + '"></i> ' + msg;
+  setTimeout(() => t.classList.remove('show'), 4000);
 }
 </script>
 </body>
