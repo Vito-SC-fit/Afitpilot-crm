@@ -16,9 +16,9 @@
   --border: rgba(15,15,15,0.12); --radius: 6px; --radius-lg: 12px;
 }
 body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
- 
-/* Layout */
 .app { display: flex; flex-direction: column; min-height: 100vh; }
+ 
+/* Topbar */
 .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 52px; position: sticky; top: 0; z-index: 100; }
 .brand { display: flex; align-items: center; gap: 8px; }
 .brand-mark { width: 26px; height: 26px; background: var(--ink); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
@@ -28,11 +28,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(
 .sheet-btn:hover { color: var(--ink); border-color: var(--ink); }
  
 /* Tabs */
-.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--surface); padding: 0 1.5rem; }
+.tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--surface); padding: 0 1.5rem; }
 .tab { padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
 .tab:hover { color: var(--ink); }
 .tab.active { color: var(--ink); border-bottom-color: var(--ink); }
-.tab-badge { display: inline-block; background: var(--accent); color: white; font-size: 10px; font-weight: 600; padding: 1px 5px; border-radius: 10px; margin-left: 5px; font-family: 'DM Mono', monospace; }
  
 /* Pages */
 .page { display: none; padding: 1.5rem; max-width: 720px; margin: 0 auto; width: 100%; }
@@ -93,34 +92,36 @@ textarea { resize: vertical; min-height: 68px; line-height: 1.6; }
 .toast.error { background: var(--accent-light); color: var(--accent); border: 1px solid rgba(200,82,42,0.2); }
 .toast.show { display: flex; }
  
-/* Discover page */
+/* Discover */
 .upload-zone { border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 2rem; text-align: center; cursor: pointer; transition: all 0.15s; background: var(--paper); }
 .upload-zone:hover, .upload-zone.drag { border-color: var(--ink); background: var(--surface); }
 .upload-zone h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
 .upload-zone p { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; }
 .upload-zone input { display: none; }
  
-.score-bar { display: flex; align-items: center; gap: 8px; }
-.score-fill { height: 5px; border-radius: 3px; background: var(--ink); transition: width 0.4s; }
+.score-fill { height: 5px; border-radius: 3px; background: var(--ink); }
 .score-fill.high { background: var(--success); }
 .score-fill.mid { background: var(--warning); }
 .score-fill.low { background: var(--accent); }
-.score-num { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; min-width: 28px; }
  
 .coach-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-bottom: 8px; background: var(--surface); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .coach-card:hover { border-color: rgba(15,15,15,0.25); }
 .coach-info { flex: 1; min-width: 0; }
-.coach-handle { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: #E1306C; }
+.coach-handle { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+.coach-handle a { color: #E1306C; text-decoration: none; }
 .coach-name { font-size: 13px; color: var(--muted); margin-top: 2px; }
-.coach-bio { font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 360px; }
-.coach-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.coach-bio { font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px; }
+.coach-meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
 .coach-tag { font-size: 11px; font-family: 'DM Mono', monospace; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); }
 .coach-tag.green { background: var(--success-light); color: var(--success); border-color: rgba(45,106,79,0.2); }
 .coach-tag.orange { background: var(--warning-light); color: var(--warning); border-color: rgba(133,79,11,0.2); }
 .coach-tag.red { background: var(--accent-light); color: var(--accent); border-color: rgba(200,82,42,0.2); }
+.score-bar { display: flex; align-items: center; gap: 6px; margin-top: 7px; max-width: 180px; }
+.score-track { flex: 1; background: var(--border); border-radius: 3px; height: 5px; }
+.score-num { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; min-width: 24px; color: var(--muted); }
 .coach-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0; }
  
-.filter-bar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.filter-bar { display: flex; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
 .filter-chip { padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); cursor: pointer; transition: all 0.15s; background: var(--surface); }
 .filter-chip:hover { color: var(--ink); border-color: var(--ink); }
 .filter-chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
@@ -130,13 +131,11 @@ textarea { resize: vertical; min-height: 68px; line-height: 1.6; }
 .empty-state h3 { font-size: 15px; margin-bottom: 6px; color: var(--ink); }
 .empty-state p { font-size: 13px; font-family: 'DM Mono', monospace; line-height: 1.6; }
  
-.spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
-.spinner-dark { border-color: rgba(15,15,15,0.15); border-top-color: var(--ink); }
-@keyframes spin { to { transform: rotate(360deg); } }
- 
-.info-box { background: var(--warning-light); border: 1px solid rgba(133,79,11,0.2); border-radius: var(--radius); padding: 12px 14px; font-size: 13px; color: var(--warning); margin-bottom: 1rem; line-height: 1.6; font-family: 'DM Mono', monospace; }
+.info-box { background: var(--warning-light); border: 1px solid rgba(133,79,11,0.2); border-radius: var(--radius); padding: 11px 14px; font-size: 13px; color: var(--warning); margin-bottom: 1rem; line-height: 1.6; font-family: 'DM Mono', monospace; }
 .info-box a { color: var(--warning); }
  
+.spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 footer { text-align: center; font-size: 11px; color: var(--muted); padding: 2rem 1rem; font-family: 'DM Mono', monospace; }
 </style>
 </head>
@@ -152,30 +151,12 @@ footer { text-align: center; font-size: 11px; color: var(--muted); padding: 2rem
   </div>
  
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('discover')">Discover</div>
-    <div class="tab" onclick="switchTab('outreach')">Outreach</div>
+    <div class="tab active" onclick="switchTab('outreach')">Outreach</div>
+    <div class="tab" onclick="switchTab('discover')">Discover</div>
   </div>
  
-  <!-- DISCOVER PAGE -->
-  <div class="page active" id="page-discover">
- 
-    <div style="height:1rem"></div>
-    <div class="info-box">
-      ① Export coaches from <a href="https://apify.com/apify/instagram-hashtag-scraper" target="_blank">Apify Instagram Hashtag Scraper</a> as CSV →
-      ② Upload here → ③ Scores auto-calculate → ④ Click any coach to pre-fill the Outreach form
-    </div>
- 
-    <div class="upload-zone" id="upload-zone" onclick="document.getElementById('csv-input').click()" ondragover="handleDrag(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-      <input type="file" id="csv-input" accept=".csv" onchange="handleFile(event)">
-      <h3>Upload Apify CSV export</h3>
-      <p>Click to browse or drag & drop a .csv file</p>
-    </div>
- 
-    <div id="discover-results" style="margin-top:1rem"></div>
-  </div>
- 
-  <!-- OUTREACH PAGE -->
-  <div class="page" id="page-outreach">
+  <!-- ── OUTREACH PAGE ── -->
+  <div class="page active" id="page-outreach">
     <div style="height:1rem"></div>
     <div id="toast-outreach" class="toast"></div>
  
@@ -206,11 +187,7 @@ footer { text-align: center; font-size: 11px; color: var(--muted); padding: 2rem
         </div>
         <div class="field">
           <label>ICP fit?</label>
-          <select id="icp">
-            <option value="Yes">Yes</option>
-            <option value="Maybe">Maybe</option>
-            <option value="No">No</option>
-          </select>
+          <select id="icp"><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
         </div>
       </div>
       <div class="field"><label>Niche / Angle</label><input type="text" id="niche" placeholder="e.g. Busy dads, fat loss, holistic coaching..."></div>
@@ -243,17 +220,34 @@ footer { text-align: center; font-size: 11px; color: var(--muted); padding: 2rem
     </div>
   </div>
  
+  <!-- ── DISCOVER PAGE ── -->
+  <div class="page" id="page-discover">
+    <div style="height:1rem"></div>
+ 
+    <div class="info-box">
+      ① Run <a href="https://apify.com/apify/instagram-hashtag-scraper" target="_blank">Apify Hashtag Scraper</a> →
+      ② Run <a href="https://apify.com/apify/instagram-profile-scraper" target="_blank">Profile Scraper</a> with usernames →
+      ③ Export as CSV → ④ Upload below → ⑤ Click any coach to pre-fill Outreach
+    </div>
+ 
+    <div class="upload-zone" id="upload-zone" onclick="document.getElementById('csv-input').click()" ondragover="handleDrag(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+      <input type="file" id="csv-input" accept=".csv,.json" onchange="handleFile(event)">
+      <h3>Upload profile CSV or JSON</h3>
+      <p>From Apify Instagram Profile Scraper · drag & drop or click</p>
+    </div>
+ 
+    <div id="discover-results" style="margin-top:1rem"></div>
+  </div>
+ 
   <footer>Afitpilot · Coach Outreach Tool</footer>
 </div>
  
 <script>
-// Replace with the /exec URL from your fresh Apps Script Web App deployment.
-// See apps-script/DEPLOY.md for steps.
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQPslPNWueoVkLp8eZlUKAgnqdHP471hrxy05G3zKE2DEJzLJ17S-FVQa6RbLkH2A1/exec";
+const SCRIPT_URL = "https://script.google.com/a/macros/afitpilot.com/s/AKfycbyAT7ZPtG0VxlRu9y8VmZ_aXxcDIvnTd4skoXAcscTi_OnYk4uAjzLDo-cW6e0Xn2uv/exec";
  
 // ── TABS ──────────────────────────────────────────────
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', ['discover','outreach'][i] === name));
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['outreach','discover'][i] === name));
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
 }
@@ -264,6 +258,7 @@ const HOOKS = [
   { key:"meta-coaching", cat:"Operations", name:"Coaches other coaches", dm:"how coaches who also work with other coaches think about what they see breaking down operationally when they look inside other people's practices" },
   { key:"solo-to-scale", cat:"Growth", name:"Solo → team scale", dm:"how coaches who've moved from solo practice to running a team think about what actually breaks at each stage of that transition" },
   { key:"online-transition", cat:"Growth", name:"In-person → online", dm:"how personal trainers who coach in-person think about whether and how to move part of their practice online — what actually holds coaches back and what makes that transition work" },
+  { key:"studio-owner", cat:"Operations", name:"Studio owner", dm:"how coaches who run their own studio think about the difference between training clients yourself versus managing a space where other trainers work — whether those two things pull in the same direction" },
   { key:"content-vs-coaching", cat:"Content", name:"Content vs coaching", dm:"how fitness creators who work with brands think about the line between content and actual coaching — whether that's something they actively want to grow or keep completely separate" },
   { key:"audience-conversion", cat:"Content", name:"Large audience → clients", dm:"how coaches with a large audience think about the gap between followers and actual coaching clients — what that conversion really looks like in practice" },
   { key:"combat-sports", cat:"Methodology", name:"Combat sports background", dm:"how coaches who come from a martial arts or combat sports background think about what that training philosophy brings to general fitness coaching" },
@@ -283,14 +278,12 @@ const HOOKS = [
   { key:"endurance", cat:"Niche", name:"Endurance / running", dm:"how endurance coaches think about the strength side of their athletes' training — how much of that methodology they own versus hand off" },
   { key:"team-sports", cat:"Niche", name:"Team sports prep", dm:"how physical preparation coaches who work with team sports athletes think about adapting their programming when they also take on individual clients" },
   { key:"real-food", cat:"Niche", name:"Nutrition philosophy", dm:"how coaches who build around a specific food or nutrition philosophy think about turning that into an actual coaching offer — what it looks like structurally versus just being a content angle" },
-  { key:"studio-owner", cat:"Operations", name:"Studio owner", dm:"how coaches who run their own studio think about the difference between training clients yourself versus managing a space where other trainers work — whether those two things pull in the same direction" },
 ];
  
 let selectedHook = null;
  
 function buildHookGrid() {
-  const grid = document.getElementById('hook-grid');
-  grid.innerHTML = HOOKS.map(h => `
+  document.getElementById('hook-grid').innerHTML = HOOKS.map(h => `
     <button class="hook-chip" data-key="${h.key}" onclick="selectHook('${h.key}')">
       <span class="chip-cat">${h.cat}</span>
       <span class="chip-name">${h.name}</span>
@@ -385,69 +378,81 @@ function clearOutreachForm() {
 let discoveredCoaches = [];
 let activeFilter = 'all';
  
-// ICP scoring keywords
-const ICP_POSITIVE = ['coach','trainer','pt ','personal train','coaching','coachen','coach sportif','entraineur','entraîneur','preparateur','préparateur','fitness coach','strength','s&c','nutrition coach','nutritionist','online coach'];
-const ICP_NEGATIVE = ['influencer','model','modèle','ambassador only','just sharing','lifestyle blogger','no longer','former coach','ex coach'];
-const BELGIUM_KEYWORDS = ['belgium','belgique','belgie','brussels','bruxelles','brussel','antwerp','anvers','gent','liège','leuven','ghent','namur','bruges','be ','🇧🇪','bxl','bel '];
+const ICP_POSITIVE = [
+  'coach','trainer','pt ','personal train','coaching','coachen','coach sportif',
+  'entraineur','entraîneur','preparateur','préparateur','fitness coach','strength',
+  's&c','nutrition coach','nutritionist','online coach','personal coach','kinesio',
+  'kiné','bodybuilding','afvallen','spieropbouw','gewichtsverlies','perte de poids',
+  'prise de masse','personal training','sportcoach','fitnesscoach','krachttraining',
+  'voedingscoach','sportbegeleiding','coachfitness','fitcoach','bodytransform',
+  'physique coach','weightloss coach','muscle coach'
+];
+const ICP_NEGATIVE = [
+  'influencer','model','modèle','no longer coaching','former coach','ex coach',
+  'photographer','videographer','dj ','music','artiste','musician','singer'
+];
+const BELGIUM = [
+  'belgium','belgique','belgie','brussels','bruxelles','brussel','antwerp','anvers',
+  'gent','liège','leuven','ghent','namur','bruges','🇧🇪','bxl','.be','stockel',
+  'ixelles','uccle','schaerbeek','molenbeek','deinze','mechelen','hasselt',
+  'kortrijk','brugge','aalst','genk'
+];
  
 function scoreCoach(row) {
   const bio = (row.biography || row.bio || row.description || '').toLowerCase();
   const username = (row.username || row.handle || '').toLowerCase();
   const fullName = (row.fullName || row.full_name || row.name || '').toLowerCase();
   const followers = parseInt(row.followersCount || row.followers_count || row.followers || '0') || 0;
-  const category = (row.category || row.businessCategory || '').toLowerCase();
-  const all = bio + ' ' + username + ' ' + fullName + ' ' + category;
- 
-  let score = 0;
-  let flags = [];
- 
-  // Coach keywords +40
-  if (ICP_POSITIVE.some(k => all.includes(k))) { score += 40; }
-  // Belgium +25
-  if (BELGIUM_KEYWORDS.some(k => all.includes(k))) { score += 25; flags.push({label:'🇧🇪 Belgium', cls:'green'}); }
-  // Follower range: 500-50k = ideal +20, 50k-200k +10, <500 or >500k -10
-  if (followers >= 500 && followers <= 50000) { score += 20; flags.push({label: followers.toLocaleString() + ' followers', cls:'green'}); }
-  else if (followers > 50000 && followers <= 200000) { score += 10; flags.push({label: followers.toLocaleString() + ' followers', cls:'orange'}); }
-  else if (followers > 200000) { score -= 10; flags.push({label: followers.toLocaleString() + ' followers', cls:'red'}); }
-  else if (followers > 0) { flags.push({label: followers.toLocaleString() + ' followers', cls:'orange'}); }
-  // Negative signals -30
-  if (ICP_NEGATIVE.some(k => all.includes(k))) { score -= 30; flags.push({label:'⚠ Not ICP', cls:'red'}); }
-  // Has website/coaching link +5
-  if (row.externalUrl || row.external_url || row.website) { score += 5; }
-  // Post count: active account
   const posts = parseInt(row.postsCount || row.posts_count || row.mediaCount || '0') || 0;
+  const website = row.externalUrl || row.external_url || row.website || '';
+  const all = bio + ' ' + username + ' ' + fullName;
+  let score = 0; let flags = [];
+ 
+  if (ICP_POSITIVE.some(k => all.includes(k))) { score += 40; flags.push({label:'✓ Coach', cls:'green'}); }
+  if (BELGIUM.some(k => all.includes(k))) { score += 25; flags.push({label:'🇧🇪 Belgium', cls:'green'}); }
+  if (followers >= 500 && followers <= 50000) { score += 20; flags.push({label: followers.toLocaleString(), cls:'green'}); }
+  else if (followers > 50000 && followers <= 200000) { score += 10; flags.push({label: followers.toLocaleString(), cls:'orange'}); }
+  else if (followers > 200000) { score -= 10; flags.push({label: followers.toLocaleString(), cls:'red'}); }
+  else if (followers > 0) { flags.push({label: followers.toLocaleString(), cls:'orange'}); }
+  if (ICP_NEGATIVE.some(k => all.includes(k))) { score -= 30; flags.push({label:'⚠ Not ICP', cls:'red'}); }
+  if (website) score += 5;
   if (posts > 20) score += 5;
  
   score = Math.max(0, Math.min(100, score));
-  const icp = score >= 60 ? 'Yes' : score >= 35 ? 'Maybe' : 'No';
-  return { score, icp, flags };
+  return { score, icp: score >= 60 ? 'Yes' : score >= 35 ? 'Maybe' : 'No', flags };
 }
  
 function handleDrag(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag'); }
 function handleDragLeave() { document.getElementById('upload-zone').classList.remove('drag'); }
 function handleDrop(e) {
   e.preventDefault(); document.getElementById('upload-zone').classList.remove('drag');
-  const file = e.dataTransfer.files[0];
-  if (file) processCSV(file);
+  if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]);
 }
-function handleFile(e) { if (e.target.files[0]) processCSV(e.target.files[0]); }
+function handleFile(e) { if (e.target.files[0]) processFile(e.target.files[0]); }
  
-function processCSV(file) {
+function processFile(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
-    const text = e.target.result;
-    const rows = parseCSV(text);
-    if (!rows.length) { renderEmpty('No valid rows found in CSV'); return; }
+    let rows = [];
+    try {
+      if (file.name.endsWith('.json')) {
+        const data = JSON.parse(e.target.result);
+        rows = Array.isArray(data) ? data : [data];
+      } else {
+        rows = parseCSV(e.target.result);
+      }
+    } catch(err) { renderEmpty('Could not parse file — check it is valid CSV or JSON'); return; }
+    if (!rows.length) { renderEmpty('No valid rows found'); return; }
     discoveredCoaches = rows.map(row => {
       const { score, icp, flags } = scoreCoach(row);
+      const username = (row.username || row.handle || '').replace('@','');
       return {
-        handle: '@' + (row.username || row.handle || '').replace('@',''),
+        handle: '@' + username,
         name: row.fullName || row.full_name || row.name || '—',
         bio: row.biography || row.bio || row.description || '',
         followers: parseInt(row.followersCount || row.followers_count || row.followers || '0') || 0,
-        url: 'https://www.instagram.com/' + (row.username || row.handle || '').replace('@','') + '/',
-        score, icp, flags,
-        raw: row
+        url: 'https://www.instagram.com/' + username + '/',
+        score, icp, flags, raw: row
       };
     }).sort((a,b) => b.score - a.score);
     activeFilter = 'all';
@@ -457,13 +462,29 @@ function processCSV(file) {
 }
  
 function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').trim());
-  return lines.slice(1).map(line => {
-    const vals = line.match(/(".*?"|[^,]+|(?<=,)(?=,)|^(?=,)|(?<=,)$)/g) || line.split(',');
-    const obj = {};
-    headers.forEach((h, i) => { obj[h] = (vals[i] || '').replace(/^"|"$/g,'').trim(); });
+  function parseLine(line) {
+    const result = []; let current = ''; let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { if (inQuotes && line[i+1] === '"') { current += '"'; i++; } else { inQuotes = !inQuotes; } }
+      else if (ch === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
+      else { current += ch; }
+    }
+    result.push(current.trim()); return result;
+  }
+  const rows = []; let current = ''; let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '"') { inQuotes = !inQuotes; current += ch; }
+    else if ((ch === '\n' || ch === '\r') && !inQuotes) { if (current.trim()) rows.push(current); current = ''; }
+    else { current += ch; }
+  }
+  if (current.trim()) rows.push(current);
+  if (rows.length < 2) return [];
+  const headers = parseLine(rows[0]).map(h => h.replace(/^"|"$/g,'').trim());
+  return rows.slice(1).map(line => {
+    const vals = parseLine(line); const obj = {};
+    headers.forEach((h,i) => { obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim(); });
     return obj;
   }).filter(r => Object.values(r).some(v => v));
 }
@@ -471,81 +492,62 @@ function parseCSV(text) {
 function renderDiscoverResults() {
   const container = document.getElementById('discover-results');
   if (!discoveredCoaches.length) { renderEmpty('No coaches found'); return; }
- 
-  const filtered = activeFilter === 'all' ? discoveredCoaches :
-    discoveredCoaches.filter(c => c.icp.toLowerCase() === activeFilter);
- 
-  const counts = {
-    all: discoveredCoaches.length,
-    yes: discoveredCoaches.filter(c => c.icp === 'Yes').length,
-    maybe: discoveredCoaches.filter(c => c.icp === 'Maybe').length,
-    no: discoveredCoaches.filter(c => c.icp === 'No').length,
-  };
- 
+  const filtered = activeFilter === 'all' ? discoveredCoaches : discoveredCoaches.filter(c => c.icp.toLowerCase() === activeFilter);
+  const counts = { all: discoveredCoaches.length, yes: discoveredCoaches.filter(c=>c.icp==='Yes').length, maybe: discoveredCoaches.filter(c=>c.icp==='Maybe').length, no: discoveredCoaches.filter(c=>c.icp==='No').length };
   container.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
       <span style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace">${discoveredCoaches.length} coaches loaded</span>
     </div>
     <div class="filter-bar">
-      ${['all','yes','maybe','no'].map(f => `<div class="filter-chip${activeFilter===f?' active':''}" onclick="setFilter('${f}')">${f.charAt(0).toUpperCase()+f.slice(1)} <span style="opacity:0.7">(${counts[f]})</span></div>`).join('')}
+      ${['all','yes','maybe','no'].map(f => `<div class="filter-chip${activeFilter===f?' active':''}" onclick="setFilter('${f}')">${f.charAt(0).toUpperCase()+f.slice(1)} (${counts[f]})</div>`).join('')}
     </div>
     ${filtered.length ? filtered.map(c => renderCoachCard(c)).join('') : '<div class="empty-state"><p>No coaches in this category</p></div>'}
   `;
 }
  
 function renderCoachCard(c) {
-  const scoreClass = c.score >= 60 ? 'high' : c.score >= 35 ? 'mid' : 'low';
-  const icpClass = c.icp === 'Yes' ? 'green' : c.icp === 'Maybe' ? 'orange' : 'red';
+  const sc = c.score >= 60 ? 'high' : c.score >= 35 ? 'mid' : 'low';
   return `
     <div class="coach-card">
       <div class="coach-info">
-        <div class="coach-handle"><a href="${c.url}" target="_blank" rel="noopener" style="color:#E1306C;text-decoration:none">${c.handle}</a></div>
+        <div class="coach-handle"><a href="${c.url}" target="_blank" rel="noopener">${c.handle}</a></div>
         ${c.name !== '—' ? `<div class="coach-name">${c.name}</div>` : ''}
-        ${c.bio ? `<div class="coach-bio" title="${c.bio}">${c.bio}</div>` : ''}
+        ${c.bio ? `<div class="coach-bio" title="${c.bio.replace(/"/g,'&quot;')}">${c.bio.slice(0,100)}${c.bio.length>100?'…':''}</div>` : ''}
         <div class="coach-meta">
-          <span class="coach-tag ${icpClass}">ICP: ${c.icp}</span>
-          ${c.flags.map(f => `<span class="coach-tag ${f.cls}">${f.label}</span>`).join('')}
+          <span class="coach-tag ${c.icp==='Yes'?'green':c.icp==='Maybe'?'orange':'red'}">ICP: ${c.icp}</span>
+          ${c.flags.map(f=>`<span class="coach-tag ${f.cls}">${f.label}</span>`).join('')}
         </div>
-        <div class="score-bar" style="margin-top:8px;max-width:200px">
-          <div style="flex:1;background:var(--border);border-radius:3px;height:5px">
-            <div class="score-fill ${scoreClass}" style="width:${c.score}%"></div>
-          </div>
+        <div class="score-bar">
+          <div class="score-track"><div class="score-fill ${sc}" style="width:${c.score}%"></div></div>
           <span class="score-num">${c.score}</span>
         </div>
       </div>
       <div class="coach-actions">
-        <button class="btn btn-outline btn-sm" onclick="prefillOutreach(${JSON.stringify(c).split('"').join('&quot;')})">→ Outreach</button>
+        <button class="btn btn-outline btn-sm" onclick='prefillOutreach(${JSON.stringify({handle:c.handle,url:c.url,name:c.name,followers:c.followers,bio:c.bio,icp:c.icp})})'>→ Outreach</button>
       </div>
     </div>`;
 }
  
 function setFilter(f) {
   activeFilter = f;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.textContent.trim().toLowerCase().startsWith(f)));
   renderDiscoverResults();
 }
  
-function prefillOutreach(coach) {
+function prefillOutreach(c) {
   switchTab('outreach');
-  document.getElementById('url').value = coach.url;
-  parseHandle(coach.url);
-  document.getElementById('name').value = coach.name !== '—' ? coach.name.split(' ')[0] : '';
-  document.getElementById('followers').value = coach.followers > 0 ? (coach.followers >= 1000 ? (coach.followers/1000).toFixed(1)+'K' : coach.followers+'') : '';
-  document.getElementById('niche').value = coach.bio ? coach.bio.slice(0,80) : '';
-  document.getElementById('icp').value = coach.icp;
+  document.getElementById('url').value = c.url;
+  parseHandle(c.url);
+  if (c.name && c.name !== '—') document.getElementById('name').value = c.name.split(' ')[0];
+  if (c.followers > 0) document.getElementById('followers').value = c.followers >= 1000 ? (c.followers/1000).toFixed(1)+'K' : String(c.followers);
+  if (c.bio) document.getElementById('niche').value = c.bio.slice(0,80);
+  document.getElementById('icp').value = c.icp;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
  
 function renderEmpty(msg) {
-  document.getElementById('discover-results').innerHTML = `
-    <div class="empty-state">
-      <div class="icon">📋</div>
-      <h3>No results yet</h3>
-      <p>${msg}</p>
-    </div>`;
+  document.getElementById('discover-results').innerHTML = `<div class="empty-state"><div class="icon">📋</div><h3>No results yet</h3><p>${msg}</p></div>`;
 }
  
-// ── TOAST ──────────────────────────────────────────────
 function showToast(page, type, msg) {
   const t = document.getElementById('toast-' + page);
   if (!t) return;
