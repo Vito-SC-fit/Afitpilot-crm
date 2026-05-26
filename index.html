@@ -10,190 +10,237 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --ink: #0f0f0f; --paper: #f7f4ef; --surface: #ffffff;
-  --muted: #6b6560; --faint: #e8e4dd; --accent: #c8522a;
-  --accent-light: #f5ede8; --success: #2d6a4f; --success-light: #e8f4ee;
+  --muted: #6b6560; --accent: #c8522a; --accent-light: #f5ede8;
+  --success: #2d6a4f; --success-light: #e8f4ee;
+  --warning: #854f0b; --warning-light: #faeeda;
   --border: rgba(15,15,15,0.12); --radius: 6px; --radius-lg: 12px;
 }
-body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; padding: 2.5rem 1rem 4rem; }
-.container { max-width: 680px; margin: 0 auto; }
+body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
  
-.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand-mark { width: 32px; height: 32px; background: var(--ink); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.brand-mark span { font-family: 'DM Serif Display', serif; color: var(--paper); font-size: 16px; }
-.brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.02em; }
-.brand-sub { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
-.sheet-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); text-decoration: none; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius); font-family: 'DM Mono', monospace; transition: all 0.15s; }
+/* Layout */
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 52px; position: sticky; top: 0; z-index: 100; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-mark { width: 26px; height: 26px; background: var(--ink); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.brand-mark span { font-family: 'DM Serif Display', serif; color: var(--paper); font-size: 13px; }
+.brand-name { font-family: 'DM Serif Display', serif; font-size: 16px; letter-spacing: -0.02em; }
+.sheet-btn { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); text-decoration: none; padding: 5px 10px; border: 1px solid var(--border); border-radius: var(--radius); font-family: 'DM Mono', monospace; transition: all 0.15s; }
 .sheet-btn:hover { color: var(--ink); border-color: var(--ink); }
  
-.section-label { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+/* Tabs */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--surface); padding: 0 1.5rem; }
+.tab { padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+.tab-badge { display: inline-block; background: var(--accent); color: white; font-size: 10px; font-weight: 600; padding: 1px 5px; border-radius: 10px; margin-left: 5px; font-family: 'DM Mono', monospace; }
+ 
+/* Pages */
+.page { display: none; padding: 1.5rem; max-width: 720px; margin: 0 auto; width: 100%; }
+.page.active { display: block; }
+ 
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
  
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
-.field { margin-bottom: 14px; }
+/* Fields */
+.field { margin-bottom: 12px; }
 .field:last-child { margin-bottom: 0; }
-label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 5px; font-family: 'DM Mono', monospace; letter-spacing: 0.03em; }
- 
-input, select, textarea { width: 100%; padding: 9px 12px; font-size: 14px; font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); border: 1px solid var(--border); border-radius: var(--radius); outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
-input:focus, select:focus, textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(15,15,15,0.06); background: var(--surface); }
+label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+input, select, textarea { width: 100%; padding: 8px 11px; font-size: 14px; font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); border: 1px solid var(--border); border-radius: var(--radius); outline: none; transition: border-color 0.15s; }
+input:focus, select:focus, textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(15,15,15,0.05); background: var(--surface); }
 textarea { resize: vertical; min-height: 68px; line-height: 1.6; }
-select { cursor: pointer; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 500px) { .row { grid-template-columns: 1fr; } }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
  
-.ig-preview { display: none; margin-top: 6px; padding: 7px 10px; background: var(--paper); border-radius: var(--radius); font-size: 13px; color: var(--muted); align-items: center; gap: 6px; border: 1px solid var(--border); font-family: 'DM Mono', monospace; }
+/* IG Preview */
+.ig-preview { display: none; margin-top: 5px; padding: 6px 10px; background: var(--paper); border-radius: var(--radius); font-size: 13px; color: var(--muted); align-items: center; gap: 6px; border: 1px solid var(--border); font-family: 'DM Mono', monospace; }
 .ig-preview.show { display: flex; }
 .ig-preview a { color: #E1306C; text-decoration: none; }
  
-/* Hook selector */
-.hook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
-@media (max-width: 500px) { .hook-grid { grid-template-columns: 1fr; } }
-.hook-chip {
-  padding: 9px 12px; border: 1px solid var(--border);
-  border-radius: var(--radius); background: var(--paper);
-  font-size: 12px; font-family: 'DM Mono', monospace;
-  color: var(--muted); cursor: pointer;
-  transition: all 0.15s; text-align: left; line-height: 1.4;
-}
+/* Buttons */
+.btn { padding: 9px 16px; border: none; border-radius: var(--radius); font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.15s, transform 0.1s; letter-spacing: -0.01em; }
+.btn:active { transform: scale(0.99); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: var(--ink); color: var(--paper); width: 100%; }
+.btn-primary:hover:not(:disabled) { opacity: 0.85; }
+.btn-accent { background: var(--accent); color: white; width: 100%; }
+.btn-accent:hover:not(:disabled) { opacity: 0.88; }
+.btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-outline:hover { color: var(--ink); border-color: var(--ink); }
+.btn-sm { padding: 6px 11px; font-size: 12px; font-family: 'DM Mono', monospace; }
+ 
+/* Hook chips */
+.hook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+@media (max-width: 480px) { .hook-grid { grid-template-columns: 1fr; } }
+.hook-chip { padding: 8px 11px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--paper); font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.4; }
 .hook-chip:hover { border-color: var(--ink); color: var(--ink); background: var(--surface); }
 .hook-chip.selected { border-color: var(--accent); color: var(--accent); background: var(--accent-light); font-weight: 500; }
-.hook-chip .chip-label { font-size: 11px; display: block; margin-bottom: 2px; opacity: 0.7; }
+.hook-chip .chip-cat { font-size: 10px; display: block; margin-bottom: 1px; opacity: 0.6; }
 .hook-chip .chip-name { font-size: 12px; display: block; }
  
-.btn-generate { width: 100%; padding: 11px 16px; background: var(--ink); color: var(--paper); border: none; border-radius: var(--radius); font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; margin-top: 4px; letter-spacing: -0.01em; }
-.btn-generate:hover { opacity: 0.85; }
-.btn-generate:active { transform: scale(0.99); }
-.btn-generate:disabled { opacity: 0.4; cursor: not-allowed; }
- 
-.btn-submit { width: 100%; padding: 11px 16px; background: var(--accent); color: white; border: none; border-radius: var(--radius); font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; letter-spacing: -0.01em; }
-.btn-submit:hover { opacity: 0.88; }
-.btn-submit:active { transform: scale(0.99); }
-.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
- 
-.btn-copy { padding: 7px 12px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; font-weight: 500; cursor: pointer; font-family: 'DM Mono', monospace; display: flex; align-items: center; gap: 5px; transition: all 0.15s; }
-.btn-copy:hover { color: var(--ink); border-color: var(--ink); }
-.btn-copy.copied { color: var(--success); border-color: var(--success); }
- 
-.dm-section { display: none; margin-top: 1rem; }
+/* DM box */
+.dm-section { display: none; margin-top: 12px; }
 .dm-section.show { display: block; }
-.dm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.dm-label { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-.dm-edit { width: 100%; padding: 14px; background: var(--paper); color: var(--ink); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 14px; line-height: 1.7; font-family: 'DM Sans', sans-serif; resize: vertical; min-height: 160px; outline: none; box-shadow: 0 0 0 3px var(--accent-light); }
-.dm-hint { font-size: 11px; color: var(--muted); margin-top: 6px; font-family: 'DM Mono', monospace; }
+.dm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.dm-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.dm-edit { width: 100%; padding: 12px; background: var(--paper); color: var(--ink); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 14px; line-height: 1.7; font-family: 'DM Sans', sans-serif; resize: vertical; min-height: 150px; outline: none; box-shadow: 0 0 0 3px var(--accent-light); }
+.dm-hint { font-size: 11px; color: var(--muted); margin-top: 5px; font-family: 'DM Mono', monospace; }
  
-.toast { display: none; padding: 11px 14px; border-radius: var(--radius); font-size: 13px; align-items: center; gap: 8px; margin-bottom: 1rem; font-family: 'DM Mono', monospace; }
+/* Toast */
+.toast { display: none; padding: 10px 14px; border-radius: var(--radius); font-size: 13px; align-items: center; gap: 8px; margin-bottom: 1rem; font-family: 'DM Mono', monospace; }
 .toast.success { background: var(--success-light); color: var(--success); border: 1px solid rgba(45,106,79,0.2); }
 .toast.error { background: var(--accent-light); color: var(--accent); border: 1px solid rgba(200,82,42,0.2); }
 .toast.show { display: flex; }
  
+/* Discover page */
+.upload-zone { border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 2rem; text-align: center; cursor: pointer; transition: all 0.15s; background: var(--paper); }
+.upload-zone:hover, .upload-zone.drag { border-color: var(--ink); background: var(--surface); }
+.upload-zone h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.upload-zone p { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; }
+.upload-zone input { display: none; }
+ 
+.score-bar { display: flex; align-items: center; gap: 8px; }
+.score-fill { height: 5px; border-radius: 3px; background: var(--ink); transition: width 0.4s; }
+.score-fill.high { background: var(--success); }
+.score-fill.mid { background: var(--warning); }
+.score-fill.low { background: var(--accent); }
+.score-num { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; min-width: 28px; }
+ 
+.coach-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-bottom: 8px; background: var(--surface); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.coach-card:hover { border-color: rgba(15,15,15,0.25); }
+.coach-info { flex: 1; min-width: 0; }
+.coach-handle { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: #E1306C; }
+.coach-name { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.coach-bio { font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 360px; }
+.coach-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.coach-tag { font-size: 11px; font-family: 'DM Mono', monospace; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); }
+.coach-tag.green { background: var(--success-light); color: var(--success); border-color: rgba(45,106,79,0.2); }
+.coach-tag.orange { background: var(--warning-light); color: var(--warning); border-color: rgba(133,79,11,0.2); }
+.coach-tag.red { background: var(--accent-light); color: var(--accent); border-color: rgba(200,82,42,0.2); }
+.coach-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0; }
+ 
+.filter-bar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.filter-chip { padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); cursor: pointer; transition: all 0.15s; background: var(--surface); }
+.filter-chip:hover { color: var(--ink); border-color: var(--ink); }
+.filter-chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+ 
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+.empty-state .icon { font-size: 32px; margin-bottom: 12px; }
+.empty-state h3 { font-size: 15px; margin-bottom: 6px; color: var(--ink); }
+.empty-state p { font-size: 13px; font-family: 'DM Mono', monospace; line-height: 1.6; }
+ 
 .spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+.spinner-dark { border-color: rgba(15,15,15,0.15); border-top-color: var(--ink); }
 @keyframes spin { to { transform: rotate(360deg); } }
-footer { text-align: center; font-size: 11px; color: var(--muted); margin-top: 2.5rem; font-family: 'DM Mono', monospace; }
+ 
+.info-box { background: var(--warning-light); border: 1px solid rgba(133,79,11,0.2); border-radius: var(--radius); padding: 12px 14px; font-size: 13px; color: var(--warning); margin-bottom: 1rem; line-height: 1.6; font-family: 'DM Mono', monospace; }
+.info-box a { color: var(--warning); }
+ 
+footer { text-align: center; font-size: 11px; color: var(--muted); padding: 2rem 1rem; font-family: 'DM Mono', monospace; }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="app">
  
-  <div class="header">
+  <div class="topbar">
     <div class="brand">
       <div class="brand-mark"><span>A</span></div>
-      <div>
-        <div class="brand-name">Afitpilot</div>
-        <div class="brand-sub">Coach Outreach Tool</div>
-      </div>
+      <span class="brand-name">Afitpilot</span>
     </div>
     <a class="sheet-btn" href="https://docs.google.com/spreadsheets/d/1Ra42Zbj7fKQeKFJZwPKDa46Z4ze_zRfsUPRUzHEBSjA/edit#gid=558936933" target="_blank" rel="noopener">↗ Outreach Log</a>
   </div>
  
-  <div id="toast" class="toast"></div>
- 
-  <!-- 01 Profile -->
-  <div class="section-label">01 — Profile info</div>
-  <div class="card">
-    <div class="field">
-      <label>Instagram URL</label>
-      <input type="url" id="url" placeholder="https://www.instagram.com/username/" oninput="parseHandle(this.value)">
-      <div class="ig-preview" id="handle-preview">
-        <span style="color:#E1306C">▸</span>
-        <a id="handle-link" href="#" target="_blank" rel="noopener"></a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field">
-        <label>First name</label>
-        <input type="text" id="name" placeholder="e.g. Laura">
-      </div>
-      <div class="field">
-        <label>Followers</label>
-        <input type="text" id="followers" placeholder="e.g. 12.4K">
-      </div>
-    </div>
-    <div class="field">
-      <label>Type / Role</label>
-      <input type="text" id="type" placeholder="e.g. PT / S&C Coach / Nutritionist">
-    </div>
-    <div class="row">
-      <div class="field">
-        <label>Language</label>
-        <select id="language">
-          <option value="">Select...</option>
-          <option>French</option>
-          <option>Dutch</option>
-          <option>English</option>
-          <option>French/English</option>
-          <option>Dutch/English</option>
-          <option>Spanish</option>
-          <option>Portuguese</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>ICP fit?</label>
-        <select id="icp">
-          <option value="Yes">Yes</option>
-          <option value="Maybe">Maybe</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-    </div>
-    <div class="field">
-      <label>Niche / Angle</label>
-      <input type="text" id="niche" placeholder="e.g. Busy dads, fat loss, holistic coaching...">
-    </div>
-    <div class="field">
-      <label>Notes / flags</label>
-      <textarea id="notes" placeholder="Anything specific you noticed about their content or profile..."></textarea>
-    </div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('discover')">Discover</div>
+    <div class="tab" onclick="switchTab('outreach')">Outreach</div>
   </div>
  
-  <!-- 02 Hook -->
-  <div class="section-label">02 — Select DM hook</div>
-  <div class="card">
-    <label style="margin-bottom:10px">Pick the angle that best fits this coach</label>
-    <div class="hook-grid" id="hook-grid">
-      <!-- filled by JS -->
+  <!-- DISCOVER PAGE -->
+  <div class="page active" id="page-discover">
+ 
+    <div style="height:1rem"></div>
+    <div class="info-box">
+      ① Export coaches from <a href="https://apify.com/apify/instagram-hashtag-scraper" target="_blank">Apify Instagram Hashtag Scraper</a> as CSV →
+      ② Upload here → ③ Scores auto-calculate → ④ Click any coach to pre-fill the Outreach form
     </div>
+ 
+    <div class="upload-zone" id="upload-zone" onclick="document.getElementById('csv-input').click()" ondragover="handleDrag(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+      <input type="file" id="csv-input" accept=".csv" onchange="handleFile(event)">
+      <h3>Upload Apify CSV export</h3>
+      <p>Click to browse or drag & drop a .csv file</p>
+    </div>
+ 
+    <div id="discover-results" style="margin-top:1rem"></div>
   </div>
  
-  <!-- 03 Generate -->
-  <div class="section-label">03 — Generate & edit DM</div>
-  <div class="card">
-    <button class="btn-generate" id="gen-btn" onclick="generateDM()">✦ Generate DM</button>
-    <div class="dm-section" id="dm-section">
-      <div style="height:12px"></div>
-      <div class="dm-header">
-        <span class="dm-label">Your DM — edit before sending</span>
-        <button class="btn-copy" id="copy-btn" onclick="copyDM()">Copy</button>
+  <!-- OUTREACH PAGE -->
+  <div class="page" id="page-outreach">
+    <div style="height:1rem"></div>
+    <div id="toast-outreach" class="toast"></div>
+ 
+    <div class="section-label">01 — Profile info</div>
+    <div class="card">
+      <div class="field">
+        <label>Instagram URL</label>
+        <input type="url" id="url" placeholder="https://www.instagram.com/username/" oninput="parseHandle(this.value)">
+        <div class="ig-preview" id="handle-preview">
+          <span style="color:#E1306C">▸</span>
+          <a id="handle-link" href="#" target="_blank" rel="noopener"></a>
+        </div>
       </div>
-      <textarea class="dm-edit" id="dm-text" rows="7"></textarea>
-      <div class="dm-hint">✎ Edit freely — what's here gets saved to the sheet</div>
+      <div class="row">
+        <div class="field"><label>First name</label><input type="text" id="name" placeholder="e.g. Laura"></div>
+        <div class="field"><label>Followers</label><input type="text" id="followers" placeholder="e.g. 12.4K"></div>
+      </div>
+      <div class="field"><label>Type / Role</label><input type="text" id="type" placeholder="e.g. PT / S&C Coach / Nutritionist"></div>
+      <div class="row">
+        <div class="field">
+          <label>Language</label>
+          <select id="language">
+            <option value="">Select...</option>
+            <option>French</option><option>Dutch</option><option>English</option>
+            <option>French/English</option><option>Dutch/English</option>
+            <option>Spanish</option><option>Portuguese</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ICP fit?</label>
+          <select id="icp">
+            <option value="Yes">Yes</option>
+            <option value="Maybe">Maybe</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Niche / Angle</label><input type="text" id="niche" placeholder="e.g. Busy dads, fat loss, holistic coaching..."></div>
+      <div class="field"><label>Notes / flags</label><textarea id="notes" placeholder="Anything specific you noticed..."></textarea></div>
     </div>
-  </div>
  
-  <!-- 04 Save -->
-  <div class="section-label">04 — Save to outreach log</div>
-  <div class="card">
-    <button class="btn-submit" id="submit-btn" onclick="saveToSheet()">↗ Add to Outreach Log</button>
+    <div class="section-label">02 — Select DM hook</div>
+    <div class="card">
+      <label style="margin-bottom:10px;display:block">Pick the angle that best fits this coach</label>
+      <div class="hook-grid" id="hook-grid"></div>
+    </div>
+ 
+    <div class="section-label">03 — Generate & edit DM</div>
+    <div class="card">
+      <button class="btn btn-primary" id="gen-btn" onclick="generateDM()">✦ Generate DM</button>
+      <div class="dm-section" id="dm-section">
+        <div style="height:10px"></div>
+        <div class="dm-header">
+          <span class="dm-label">Your DM — edit before sending</span>
+          <button class="btn btn-outline btn-sm" id="copy-btn" onclick="copyDM()">Copy</button>
+        </div>
+        <textarea class="dm-edit" id="dm-text" rows="7"></textarea>
+        <div class="dm-hint">✎ Edit freely — this gets saved to the sheet</div>
+      </div>
+    </div>
+ 
+    <div class="section-label">04 — Save to outreach log</div>
+    <div class="card">
+      <button class="btn btn-accent" id="submit-btn" onclick="saveToSheet()">↗ Add to Outreach Log</button>
+    </div>
   </div>
  
   <footer>Afitpilot · Coach Outreach Tool</footer>
@@ -202,121 +249,106 @@ footer { text-align: center; font-size: 11px; color: var(--muted); margin-top: 2
 <script>
 const SCRIPT_URL = "https://script.google.com/a/macros/afitpilot.com/s/AKfycbyAT7ZPtG0VxlRu9y8VmZ_aXxcDIvnTd4skoXAcscTi_OnYk4uAjzLDo-cW6e0Xn2uv/exec";
  
-// All hooks — label shown in chip, key used internally, dm = the "specific thing" slot
+// ── TABS ──────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', ['discover','outreach'][i] === name));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+}
+ 
+// ── HOOKS ─────────────────────────────────────────────
 const HOOKS = [
-  { key: "multi-role", label: "Multi-role ops", name: "Juggling multiple roles", dm: "how coaches who juggle multiple roles — training clients, creating content, running their own products — actually manage their day-to-day operations and where the friction shows up" },
-  { key: "meta-coaching", label: "Coaches other coaches", name: "Coaches coaches", dm: "how coaches who also work with other coaches think about what they see breaking down operationally when they look inside other people's practices" },
-  { key: "niche-online", label: "Niche online delivery", name: "Niche online delivery", dm: "how coaches who work in a very specific niche think about delivering that work online — especially when your approach needs to be highly personalised but your audience is global" },
-  { key: "content-vs-coaching", label: "Content vs coaching", name: "Content vs coaching split", dm: "how fitness creators who work with brands think about the line between content and actual coaching — whether that's something they actively want to grow or keep completely separate" },
-  { key: "solo-to-scale", label: "Solo → team scale", name: "Scaling from solo", dm: "how coaches who've moved from solo practice to running a team think about what actually breaks at each stage of that transition — and what they'd do differently" },
-  { key: "combat-sports", label: "Combat sports background", name: "Combat sports → fitness", dm: "how coaches who come from a martial arts or combat sports background think about what that training philosophy brings to general fitness coaching — whether the discipline and methodology actually transfers" },
-  { key: "multi-format", label: "Multi-format delivery", name: "Multi-format ops", dm: "how coaches who run multiple delivery formats at once — individual, duo, group, online — think about managing capacity without one format eating into the others" },
-  { key: "90-day-program", label: "Structured program", name: "Program completion", dm: "how online coaches who run structured programs — fixed duration, defined methodology — think about what actually makes clients complete the program versus drop off before the end" },
-  { key: "entrepreneur-niche", label: "Entrepreneur/pro niche", name: "Busy professional clients", dm: "how coaches who work specifically with entrepreneurs and professionals think about keeping clients consistent when their schedule is the main obstacle to everything" },
-  { key: "pt-nutrition", label: "PT + nutrition combo", name: "Training + nutrition", dm: "how coaches who cover both training and nutrition think about combining the two in practice — whether clients actually follow it as one integrated plan or treat them as completely separate things" },
-  { key: "elite-athlete", label: "Elite athlete coach", name: "Elite → general translation", dm: "how elite athletes who also coach think about translating their own competition prep into something that actually works for non-elite clients — how much of the methodology really transfers" },
-  { key: "hyrox", label: "Hyrox / functional", name: "Hyrox prep niche", dm: "how coaches who specialise in Hyrox prep think about that offer — whether it works as a standalone or mainly pulls in clients who are already training with them for something else" },
-  { key: "prenatal", label: "Pre/post natal", name: "Pre & post natal", dm: "how coaches who specialise in pre and post natal work think about structuring that offer — whether it runs alongside a general coaching practice or needs to sit completely separately" },
-  { key: "platform-coaching", label: "Platform/club coaching", name: "Platform-based coaching", dm: "how personal trainers who work within a coaching platform or club structure think about what they can and can't control in how they deliver their work day-to-day" },
-  { key: "women-coaching", label: "Women's coaching", name: "Women-only coaching", dm: "how coaches who work exclusively with women think about what's fundamentally different in that coaching relationship — whether the programming or the client management changes more" },
-  { key: "holistic", label: "Holistic / mindset", name: "Holistic coaching", dm: "how coaches who combine physical training with mindset or personal development work think about structuring that offer — whether clients engage with both sides equally or it skews heavily one way" },
-  { key: "endurance", label: "Endurance / running", name: "Endurance coaching", dm: "how endurance coaches think about the strength side of their athletes' training — how much of that methodology they own versus hand off, and how they think about the crossover" },
-  { key: "team-sports", label: "Team sports prep", name: "Team → individual", dm: "how physical preparation coaches who work with team sports athletes think about adapting their programming when they also take on individual clients — whether the logic transfers or it's essentially two different jobs" },
-  { key: "audience-conversion", label: "Large audience", name: "Followers → clients", dm: "how coaches with a large audience think about the gap between followers and actual coaching clients — what that conversion really looks like in practice and whether a big following helps or creates its own complications" },
-  { key: "online-transition", label: "In-person → online", name: "Online transition", dm: "how personal trainers who coach in-person think about whether and how to move part of their practice online — what actually holds coaches back and what makes that transition work" },
-  { key: "philosophy-driven", label: "Philosophy-driven", name: "Coaching philosophy", dm: "how coaches who have a distinct coaching philosophy or methodology think about communicating that to clients who just want results without the framework" },
-  { key: "dual-specialisation", label: "Dual specialisation", name: "Fat loss + hypertrophy", dm: "how coaches who specialise in both fat loss and hypertrophy think about switching between the two with clients — whether the programming and the client management feel fundamentally different" },
-  { key: "real-food", label: "Food philosophy", name: "Nutrition philosophy → offer", dm: "how coaches who build around a specific food or nutrition philosophy think about turning that into an actual coaching offer — what it looks like structurally versus just being a content angle" },
-  { key: "community-niche", label: "Community niche", name: "Community-specific coaching", dm: "how coaches who work with a very specific community or identity group think about building trust with that audience — whether the coaching itself needs to be fundamentally different or it's more about how you position and communicate it" },
+  { key:"multi-role", cat:"Operations", name:"Multi-role ops", dm:"how coaches who juggle multiple roles — training clients, creating content, running their own products — actually manage their day-to-day operations and where the friction shows up" },
+  { key:"meta-coaching", cat:"Operations", name:"Coaches other coaches", dm:"how coaches who also work with other coaches think about what they see breaking down operationally when they look inside other people's practices" },
+  { key:"solo-to-scale", cat:"Growth", name:"Solo → team scale", dm:"how coaches who've moved from solo practice to running a team think about what actually breaks at each stage of that transition" },
+  { key:"online-transition", cat:"Growth", name:"In-person → online", dm:"how personal trainers who coach in-person think about whether and how to move part of their practice online — what actually holds coaches back and what makes that transition work" },
+  { key:"content-vs-coaching", cat:"Content", name:"Content vs coaching", dm:"how fitness creators who work with brands think about the line between content and actual coaching — whether that's something they actively want to grow or keep completely separate" },
+  { key:"audience-conversion", cat:"Content", name:"Large audience → clients", dm:"how coaches with a large audience think about the gap between followers and actual coaching clients — what that conversion really looks like in practice" },
+  { key:"combat-sports", cat:"Methodology", name:"Combat sports background", dm:"how coaches who come from a martial arts or combat sports background think about what that training philosophy brings to general fitness coaching" },
+  { key:"hyrox", cat:"Methodology", name:"Hyrox / functional", dm:"how coaches who specialise in Hyrox prep think about that offer — whether it works as a standalone or mainly pulls in clients who are already training with them for something else" },
+  { key:"elite-athlete", cat:"Methodology", name:"Elite → general clients", dm:"how elite athletes who also coach think about translating their own competition prep into something that actually works for non-elite clients" },
+  { key:"dual-specialisation", cat:"Methodology", name:"Fat loss + hypertrophy", dm:"how coaches who specialise in both fat loss and hypertrophy think about switching between the two with clients — whether the programming and the client management feel fundamentally different" },
+  { key:"philosophy-driven", cat:"Methodology", name:"Named methodology", dm:"how coaches who've built a named methodology think about getting clients to trust the system rather than just the results — whether having a defined method changes how people commit" },
+  { key:"multi-format", cat:"Delivery", name:"Multi-format delivery", dm:"how coaches who run multiple delivery formats at once — individual, duo, group, online — think about managing capacity without one format eating into the others" },
+  { key:"90-day-program", cat:"Delivery", name:"Structured program", dm:"how online coaches who run structured programs — fixed duration, defined methodology — think about what actually makes clients complete the program versus drop off before the end" },
+  { key:"platform-coaching", cat:"Delivery", name:"Platform/club coaching", dm:"how personal trainers who work within a coaching platform or club structure think about what they can and can't control in how they deliver their work" },
+  { key:"pt-nutrition", cat:"Niche", name:"PT + nutrition combo", dm:"how coaches who cover both training and nutrition think about combining the two in practice — whether clients follow it as one integrated plan or treat them completely separately" },
+  { key:"entrepreneur-niche", cat:"Niche", name:"Entrepreneur/pro clients", dm:"how coaches who work specifically with entrepreneurs and professionals think about keeping clients consistent when their schedule is the main obstacle" },
+  { key:"women-coaching", cat:"Niche", name:"Women's coaching", dm:"how coaches who work exclusively with women think about what's fundamentally different in that coaching relationship — whether the programming or the client management changes more" },
+  { key:"prenatal", cat:"Niche", name:"Pre/post natal", dm:"how coaches who specialise in pre and post natal work think about structuring that offer — whether it runs alongside a general coaching practice or needs to sit completely separately" },
+  { key:"community-niche", cat:"Niche", name:"Community-specific niche", dm:"how coaches who work with a very specific community or identity group think about building trust with that audience — whether the coaching needs to be fundamentally different or it's more about positioning" },
+  { key:"holistic", cat:"Niche", name:"Holistic / mindset", dm:"how coaches who combine physical training with mindset or personal development work think about structuring that offer — whether clients engage with both sides equally" },
+  { key:"endurance", cat:"Niche", name:"Endurance / running", dm:"how endurance coaches think about the strength side of their athletes' training — how much of that methodology they own versus hand off" },
+  { key:"team-sports", cat:"Niche", name:"Team sports prep", dm:"how physical preparation coaches who work with team sports athletes think about adapting their programming when they also take on individual clients" },
+  { key:"real-food", cat:"Niche", name:"Nutrition philosophy", dm:"how coaches who build around a specific food or nutrition philosophy think about turning that into an actual coaching offer — what it looks like structurally versus just being a content angle" },
+  { key:"studio-owner", cat:"Operations", name:"Studio owner", dm:"how coaches who run their own studio think about the difference between training clients yourself versus managing a space where other trainers work — whether those two things pull in the same direction" },
 ];
  
 let selectedHook = null;
  
 function buildHookGrid() {
   const grid = document.getElementById('hook-grid');
-  grid.innerHTML = HOOKS.map((h, i) => `
+  grid.innerHTML = HOOKS.map(h => `
     <button class="hook-chip" data-key="${h.key}" onclick="selectHook('${h.key}')">
-      <span class="chip-label">${h.label}</span>
+      <span class="chip-cat">${h.cat}</span>
       <span class="chip-name">${h.name}</span>
-    </button>
-  `).join('');
+    </button>`).join('');
 }
  
 function selectHook(key) {
   selectedHook = key;
-  document.querySelectorAll('.hook-chip').forEach(c => {
-    c.classList.toggle('selected', c.dataset.key === key);
-  });
+  document.querySelectorAll('.hook-chip').forEach(c => c.classList.toggle('selected', c.dataset.key === key));
 }
  
+// ── OUTREACH FORM ──────────────────────────────────────
 function parseHandle(url) {
   const match = url.match(/instagram\.com\/([^/?#\s]+)/);
   const preview = document.getElementById('handle-preview');
   const link = document.getElementById('handle-link');
   if (match && match[1] && !['p','reel','stories','explore'].includes(match[1])) {
-    link.textContent = '@' + match[1];
-    link.href = 'https://www.instagram.com/' + match[1] + '/';
+    link.textContent = '@' + match[1]; link.href = 'https://www.instagram.com/' + match[1] + '/';
     preview.classList.add('show');
-  } else {
-    preview.classList.remove('show');
-  }
+  } else { preview.classList.remove('show'); }
 }
  
 function getHandle(url) {
-  const match = url.match(/instagram\.com\/([^/?#\s]+)/);
-  return match ? '@' + match[1] : url;
+  const m = url.match(/instagram\.com\/([^/?#\s]+)/); return m ? '@' + m[1] : url;
 }
  
 function generateDM() {
-  if (!selectedHook) {
-    showToast('error', 'Select a DM hook first');
-    return;
-  }
- 
+  if (!selectedHook) { showToast('outreach','error','Select a DM hook first'); return; }
   const hook = HOOKS.find(h => h.key === selectedHook);
   const name = document.getElementById('name').value.trim();
   const greeting = name && name !== '—' ? `Hey ${name}` : 'Hey';
- 
   const dm = `${greeting} — I'm a founder doing research on ${hook.dm}. Not pitching anything, just genuinely trying to understand how that works in practice. If you've got 15 minutes in the next couple of weeks, I'd really value your perspective — happy to share what I'm finding from other coaches in return.`;
- 
   const btn = document.getElementById('gen-btn');
-  btn.disabled = true;
-  btn.textContent = 'Generating...';
- 
+  btn.disabled = true; btn.textContent = 'Generating...';
   setTimeout(() => {
     document.getElementById('dm-text').value = dm;
     document.getElementById('dm-section').classList.add('show');
-    btn.disabled = false;
-    btn.textContent = '↺ Regenerate';
-    document.getElementById('dm-text').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 400);
+    btn.disabled = false; btn.textContent = '↺ Regenerate';
+    document.getElementById('dm-text').scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }, 350);
 }
  
 function copyDM() {
-  const text = document.getElementById('dm-text').value;
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(document.getElementById('dm-text').value).then(() => {
     const btn = document.getElementById('copy-btn');
-    btn.textContent = 'Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    btn.textContent = 'Copied ✓'; btn.style.color = 'var(--success)';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; }, 2000);
   });
 }
  
 async function saveToSheet() {
   const url = document.getElementById('url').value.trim();
   const dm = document.getElementById('dm-text').value.trim();
-  if (!url) { showToast('error', 'Add an Instagram URL first'); return; }
-  if (!dm) { showToast('error', 'Generate a DM first'); return; }
- 
+  if (!url) { showToast('outreach','error','Add an Instagram URL first'); return; }
+  if (!dm) { showToast('outreach','error','Generate a DM first'); return; }
   const hook = selectedHook ? HOOKS.find(h => h.key === selectedHook) : null;
- 
   const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Saving...';
- 
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Saving...';
   const coach = {
-    handle: getHandle(url),
-    url,
+    handle: getHandle(url), url,
     name: document.getElementById('name').value.trim() || '—',
     followers: document.getElementById('followers').value.trim() || '—',
     type: document.getElementById('type').value.trim() || '—',
@@ -327,27 +359,17 @@ async function saveToSheet() {
     notes: dm,
     date: new Date().toLocaleDateString('en-GB')
   };
- 
-  const params = new URLSearchParams();
-  params.append('data', JSON.stringify(coach));
- 
+  const params = new URLSearchParams(); params.append('data', JSON.stringify(coach));
   try {
-    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-    showToast('success', 'Saved to Outreach Log ✓');
-    clearForm();
-  } catch(err) {
-    showToast('error', 'Connection error — try again');
-  }
- 
-  btn.disabled = false;
-  btn.innerHTML = '↗ Add to Outreach Log';
+    await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body: params });
+    showToast('outreach','success','Saved to Outreach Log ✓');
+    clearOutreachForm();
+  } catch(err) { showToast('outreach','error','Connection error — try again'); }
+  btn.disabled = false; btn.innerHTML = '↗ Add to Outreach Log';
 }
  
-function clearForm() {
-  ['url','name','followers','type','niche','notes','dm-text'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
+function clearOutreachForm() {
+  ['url','name','followers','type','niche','notes','dm-text'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
   document.getElementById('language').value = '';
   document.getElementById('icp').value = 'Yes';
   document.getElementById('handle-preview').classList.remove('show');
@@ -357,8 +379,174 @@ function clearForm() {
   document.querySelectorAll('.hook-chip').forEach(c => c.classList.remove('selected'));
 }
  
-function showToast(type, msg) {
-  const t = document.getElementById('toast');
+// ── DISCOVER ───────────────────────────────────────────
+let discoveredCoaches = [];
+let activeFilter = 'all';
+ 
+// ICP scoring keywords
+const ICP_POSITIVE = ['coach','trainer','pt ','personal train','coaching','coachen','coach sportif','entraineur','entraîneur','preparateur','préparateur','fitness coach','strength','s&c','nutrition coach','nutritionist','online coach'];
+const ICP_NEGATIVE = ['influencer','model','modèle','ambassador only','just sharing','lifestyle blogger','no longer','former coach','ex coach'];
+const BELGIUM_KEYWORDS = ['belgium','belgique','belgie','brussels','bruxelles','brussel','antwerp','anvers','gent','liège','leuven','ghent','namur','bruges','be ','🇧🇪','bxl','bel '];
+ 
+function scoreCoach(row) {
+  const bio = (row.biography || row.bio || row.description || '').toLowerCase();
+  const username = (row.username || row.handle || '').toLowerCase();
+  const fullName = (row.fullName || row.full_name || row.name || '').toLowerCase();
+  const followers = parseInt(row.followersCount || row.followers_count || row.followers || '0') || 0;
+  const category = (row.category || row.businessCategory || '').toLowerCase();
+  const all = bio + ' ' + username + ' ' + fullName + ' ' + category;
+ 
+  let score = 0;
+  let flags = [];
+ 
+  // Coach keywords +40
+  if (ICP_POSITIVE.some(k => all.includes(k))) { score += 40; }
+  // Belgium +25
+  if (BELGIUM_KEYWORDS.some(k => all.includes(k))) { score += 25; flags.push({label:'🇧🇪 Belgium', cls:'green'}); }
+  // Follower range: 500-50k = ideal +20, 50k-200k +10, <500 or >500k -10
+  if (followers >= 500 && followers <= 50000) { score += 20; flags.push({label: followers.toLocaleString() + ' followers', cls:'green'}); }
+  else if (followers > 50000 && followers <= 200000) { score += 10; flags.push({label: followers.toLocaleString() + ' followers', cls:'orange'}); }
+  else if (followers > 200000) { score -= 10; flags.push({label: followers.toLocaleString() + ' followers', cls:'red'}); }
+  else if (followers > 0) { flags.push({label: followers.toLocaleString() + ' followers', cls:'orange'}); }
+  // Negative signals -30
+  if (ICP_NEGATIVE.some(k => all.includes(k))) { score -= 30; flags.push({label:'⚠ Not ICP', cls:'red'}); }
+  // Has website/coaching link +5
+  if (row.externalUrl || row.external_url || row.website) { score += 5; }
+  // Post count: active account
+  const posts = parseInt(row.postsCount || row.posts_count || row.mediaCount || '0') || 0;
+  if (posts > 20) score += 5;
+ 
+  score = Math.max(0, Math.min(100, score));
+  const icp = score >= 60 ? 'Yes' : score >= 35 ? 'Maybe' : 'No';
+  return { score, icp, flags };
+}
+ 
+function handleDrag(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag'); }
+function handleDragLeave() { document.getElementById('upload-zone').classList.remove('drag'); }
+function handleDrop(e) {
+  e.preventDefault(); document.getElementById('upload-zone').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) processCSV(file);
+}
+function handleFile(e) { if (e.target.files[0]) processCSV(e.target.files[0]); }
+ 
+function processCSV(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    const rows = parseCSV(text);
+    if (!rows.length) { renderEmpty('No valid rows found in CSV'); return; }
+    discoveredCoaches = rows.map(row => {
+      const { score, icp, flags } = scoreCoach(row);
+      return {
+        handle: '@' + (row.username || row.handle || '').replace('@',''),
+        name: row.fullName || row.full_name || row.name || '—',
+        bio: row.biography || row.bio || row.description || '',
+        followers: parseInt(row.followersCount || row.followers_count || row.followers || '0') || 0,
+        url: 'https://www.instagram.com/' + (row.username || row.handle || '').replace('@','') + '/',
+        score, icp, flags,
+        raw: row
+      };
+    }).sort((a,b) => b.score - a.score);
+    activeFilter = 'all';
+    renderDiscoverResults();
+  };
+  reader.readAsText(file);
+}
+ 
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').trim());
+  return lines.slice(1).map(line => {
+    const vals = line.match(/(".*?"|[^,]+|(?<=,)(?=,)|^(?=,)|(?<=,)$)/g) || line.split(',');
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (vals[i] || '').replace(/^"|"$/g,'').trim(); });
+    return obj;
+  }).filter(r => Object.values(r).some(v => v));
+}
+ 
+function renderDiscoverResults() {
+  const container = document.getElementById('discover-results');
+  if (!discoveredCoaches.length) { renderEmpty('No coaches found'); return; }
+ 
+  const filtered = activeFilter === 'all' ? discoveredCoaches :
+    discoveredCoaches.filter(c => c.icp.toLowerCase() === activeFilter);
+ 
+  const counts = {
+    all: discoveredCoaches.length,
+    yes: discoveredCoaches.filter(c => c.icp === 'Yes').length,
+    maybe: discoveredCoaches.filter(c => c.icp === 'Maybe').length,
+    no: discoveredCoaches.filter(c => c.icp === 'No').length,
+  };
+ 
+  container.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+      <span style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace">${discoveredCoaches.length} coaches loaded</span>
+    </div>
+    <div class="filter-bar">
+      ${['all','yes','maybe','no'].map(f => `<div class="filter-chip${activeFilter===f?' active':''}" onclick="setFilter('${f}')">${f.charAt(0).toUpperCase()+f.slice(1)} <span style="opacity:0.7">(${counts[f]})</span></div>`).join('')}
+    </div>
+    ${filtered.length ? filtered.map(c => renderCoachCard(c)).join('') : '<div class="empty-state"><p>No coaches in this category</p></div>'}
+  `;
+}
+ 
+function renderCoachCard(c) {
+  const scoreClass = c.score >= 60 ? 'high' : c.score >= 35 ? 'mid' : 'low';
+  const icpClass = c.icp === 'Yes' ? 'green' : c.icp === 'Maybe' ? 'orange' : 'red';
+  return `
+    <div class="coach-card">
+      <div class="coach-info">
+        <div class="coach-handle"><a href="${c.url}" target="_blank" rel="noopener" style="color:#E1306C;text-decoration:none">${c.handle}</a></div>
+        ${c.name !== '—' ? `<div class="coach-name">${c.name}</div>` : ''}
+        ${c.bio ? `<div class="coach-bio" title="${c.bio}">${c.bio}</div>` : ''}
+        <div class="coach-meta">
+          <span class="coach-tag ${icpClass}">ICP: ${c.icp}</span>
+          ${c.flags.map(f => `<span class="coach-tag ${f.cls}">${f.label}</span>`).join('')}
+        </div>
+        <div class="score-bar" style="margin-top:8px;max-width:200px">
+          <div style="flex:1;background:var(--border);border-radius:3px;height:5px">
+            <div class="score-fill ${scoreClass}" style="width:${c.score}%"></div>
+          </div>
+          <span class="score-num">${c.score}</span>
+        </div>
+      </div>
+      <div class="coach-actions">
+        <button class="btn btn-outline btn-sm" onclick="prefillOutreach(${JSON.stringify(c).split('"').join('&quot;')})">→ Outreach</button>
+      </div>
+    </div>`;
+}
+ 
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.textContent.trim().toLowerCase().startsWith(f)));
+  renderDiscoverResults();
+}
+ 
+function prefillOutreach(coach) {
+  switchTab('outreach');
+  document.getElementById('url').value = coach.url;
+  parseHandle(coach.url);
+  document.getElementById('name').value = coach.name !== '—' ? coach.name.split(' ')[0] : '';
+  document.getElementById('followers').value = coach.followers > 0 ? (coach.followers >= 1000 ? (coach.followers/1000).toFixed(1)+'K' : coach.followers+'') : '';
+  document.getElementById('niche').value = coach.bio ? coach.bio.slice(0,80) : '';
+  document.getElementById('icp').value = coach.icp;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+ 
+function renderEmpty(msg) {
+  document.getElementById('discover-results').innerHTML = `
+    <div class="empty-state">
+      <div class="icon">📋</div>
+      <h3>No results yet</h3>
+      <p>${msg}</p>
+    </div>`;
+}
+ 
+// ── TOAST ──────────────────────────────────────────────
+function showToast(page, type, msg) {
+  const t = document.getElementById('toast-' + page);
+  if (!t) return;
   t.className = 'toast ' + type + ' show';
   t.textContent = msg;
   setTimeout(() => t.classList.remove('show'), 4000);
